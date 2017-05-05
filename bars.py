@@ -1,7 +1,7 @@
 import json
 import os
 import sys
-FILE_DATA = 'data-2897-2016-11-23.json'
+BARS_INFORMATION = 'data-2897-2016-11-23.json'
 
 
 def load_data(filepath):
@@ -11,12 +11,12 @@ def load_data(filepath):
         return json.load(file_handler)
 
 
-def get_biggest_bar(data):
-    return max(data, key=lambda bar: bar['SeatsCount'])
+def get_biggest_bar(bars):
+    return max(bars, key=lambda bar: bar['SeatsCount'])
 
 
-def get_smallest_bar(data):
-    return min(data, key=lambda bar: bar['SeatsCount'])
+def get_smallest_bar(bars):
+    return min(bars, key=lambda bar: bar['SeatsCount'])
 
 
 def get_distance_to_bar(bar, longitude, latitude):
@@ -25,10 +25,10 @@ def get_distance_to_bar(bar, longitude, latitude):
     return ((longitude_bar-longitude)**2 + (latitude_bar-latitude)**2)**0.5
 
 
-def get_closest_bar(data, longitude, latitude):
-    closest_bar = data[0]
-    min_distance = get_distance_to_bar(data[0], longitude, latitude)
-    for bar in data[1:]:
+def get_closest_bar(bars, longitude, latitude):
+    closest_bar = bars[0]
+    min_distance = get_distance_to_bar(bars[0], longitude, latitude)
+    for bar in bars[1:]:
         distance = get_distance_to_bar(bar, longitude, latitude)
         if distance < min_distance:
             closest_bar = bar
@@ -37,13 +37,13 @@ def get_closest_bar(data, longitude, latitude):
 
 
 if __name__ == '__main__':
-    data = load_data(FILE_DATA)
+    bars = load_data(BARS_INFORMATION)
     try:
         longitude = float(input('Input your longitude: '))
         latitude = float(input('Input your latitude: '))
     except ValueError:
-        print('Please input correct data')
+        print('Please input correct longitude and latitude')
         sys.exit(2)
-    print(get_biggest_bar(data))
-    print(get_smallest_bar(data))
-    print(get_closest_bar(data, longitude, latitude))
+    print(get_biggest_bar(bars))
+    print(get_smallest_bar(bars))
+    print(get_closest_bar(bars, longitude, latitude))
