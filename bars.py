@@ -1,6 +1,7 @@
 import json
 import os
 import sys
+from pprint_json import pretty_print_json
 BARS_INFORMATION = 'data-2897-2016-11-23.json'
 
 
@@ -35,6 +36,6 @@ if __name__ == '__main__':
     except ValueError:
         print('Please input correct longitude and latitude')
         sys.exit(2)
-    print(get_biggest_bar(bars))
-    print(get_smallest_bar(bars))
-    print(get_closest_bar(bars, longitude, latitude))
+    pretty_print_json(get_biggest_bar(bars))
+    pretty_print_json(get_smallest_bar(bars))
+    pretty_print_json(get_closest_bar(bars, longitude, latitude))
