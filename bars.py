@@ -19,21 +19,12 @@ def get_smallest_bar(bars):
     return min(bars, key=lambda bar: bar['SeatsCount'])
 
 
-def get_distance_to_bar(bar, longitude, latitude):
-    longitude_bar = bar['geoData']['coordinates'][0]
-    latitude_bar = bar['geoData']['coordinates'][1]
-    return ((longitude_bar-longitude)**2 + (latitude_bar-latitude)**2)**0.5
-
-
 def get_closest_bar(bars, longitude, latitude):
-    closest_bar = bars[0]
-    min_distance = get_distance_to_bar(bars[0], longitude, latitude)
-    for bar in bars[1:]:
-        distance = get_distance_to_bar(bar, longitude, latitude)
-        if distance < min_distance:
-            closest_bar = bar
-            min_distance = distance
-    return closest_bar
+    def get_distance_to_bar(bar):
+        longitude_bar = bar['geoData']['coordinates'][0]
+        latitude_bar = bar['geoData']['coordinates'][1]
+        return ((longitude_bar-longitude)**2 + (latitude_bar-latitude)**2)**0.5
+    return min(bars, key=get_distance_to_bar)
 
 
 if __name__ == '__main__':
