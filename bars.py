@@ -2,7 +2,6 @@ import json
 import os
 import sys
 from pprint_json import pretty_print_json
-BARS_INFORMATION = 'data-2897-2016-11-23.json'
 
 
 def load_data(filepath):
@@ -29,12 +28,21 @@ def get_closest_bar(bars, longitude, latitude):
 
 
 if __name__ == '__main__':
-    bars = load_data(BARS_INFORMATION)
     try:
+        file_path = sys.argv[1]
+        bars = load_data(file_path)
+        if not bars:
+            raise Exception('File not found: {0}'.format(file_path))
         longitude = float(input('Input your longitude: '))
         latitude = float(input('Input your latitude: '))
+    except IndexError:
+        print('Usage: python pprint_json.py <path to file>')
+        sys.exit(2)
     except ValueError:
         print('Please input correct longitude and latitude')
+        sys.exit(2)
+    except Exception as e:
+        print(e)
         sys.exit(2)
     pretty_print_json(get_biggest_bar(bars))
     pretty_print_json(get_smallest_bar(bars))

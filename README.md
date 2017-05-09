@@ -5,12 +5,13 @@
 # Как запустить
 
 Скрипт требует для своей работы установленного интерпретатора Python версии 3.5
-Так же необходимо [скачать файл с данными](https://data.mos.ru/opendata/7710881420-bary) и положить их в одну папку вместе со скриптом.
+Так же необходимо [скачать файл с данными](https://data.mos.ru/opendata/7710881420-bary) в формате JSON.
+Для запуска необходимо передать путь к ранее скаченному файлу.
 Запуск на Linux:
 
 ```#!bash
 
-$ python bars.py # possibly requires call of python3 executive instead of just python
+$ python bars.py <paht to file> # possibly requires call of python3 executive instead of just python
 # {'TypeObject': 'бар', 'District': 'Даниловский район', ....} самый большой бар
 # {'TypeObject': 'бар', 'District': 'район Митино', ....} самый маленький бар
 # {'TypeObject': 'бар', 'District': 'Красносельский район', ....} ближайший бар относительно введённых с клавиатуры координат
