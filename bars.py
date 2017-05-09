@@ -1,7 +1,7 @@
 import json
 import os
 import sys
-from pprint_json import pretty_print_json
+import pprint
 
 
 def load_data(filepath):
@@ -27,6 +27,11 @@ def get_closest_bar(bars, longitude, latitude):
     return min(bars, key=get_distance_to_bar)
 
 
+def print_bar_information(feature, bar):
+    print(feature)
+    pprint.pprint(bar, indent=4)
+
+
 if __name__ == '__main__':
     try:
         file_path = sys.argv[1]
@@ -44,6 +49,6 @@ if __name__ == '__main__':
     except Exception as e:
         print(e)
         sys.exit(2)
-    pretty_print_json(get_biggest_bar(bars))
-    pretty_print_json(get_smallest_bar(bars))
-    pretty_print_json(get_closest_bar(bars, longitude, latitude))
+    print_bar_information('Самый большой бар:', get_biggest_bar(bars))
+    print_bar_information('Самый маленький бар:', get_smallest_bar(bars))
+    print_bar_information('Ближайший бар:', get_closest_bar(bars, longitude, latitude))
